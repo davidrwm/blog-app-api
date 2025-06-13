@@ -59,7 +59,12 @@ blogRoutes.get('/', getUserId, (req, res) => {
                     SELECT COUNT(post_votes.id)
                     FROM post_votes
                     WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = FALSE
-                ), 0) AS is_disliked
+                ), 0) AS is_disliked,
+                IFNULL((
+                    SELECT COUNT(saved_posts.id)
+                    FROM saved_posts
+                    WHERE saved_posts.post_id = posts.id AND saved_posts.user_id = ?
+                ), 0) AS is_saved
             FROM posts
             LEFT JOIN users ON posts.user_id = users.id
             ORDER BY posts.id DESC
@@ -67,7 +72,7 @@ blogRoutes.get('/', getUserId, (req, res) => {
         `
     )
 
-    const posts = getPostsQuery.all(req.userId, req.userId, size, (page - 1) * size)
+    const posts = getPostsQuery.all(req.userId, req.userId, req.userId, size, (page - 1) * size)
 
     res.send({
         status: 200,
@@ -137,7 +142,12 @@ blogRoutes.get('/savedPosts', checkAuth, (req, res) => {
                     SELECT COUNT(post_votes.id)
                     FROM post_votes
                     WHERE post_votes.post_id = saved_posts.post_id AND post_votes.user_id = ? AND post_votes.is_like = FALSE
-                ), 0) AS is_disliked
+                ), 0) AS is_disliked,
+                IFNULL((
+                    SELECT COUNT(saved_posts.id)
+                    FROM saved_posts
+                    WHERE saved_posts.post_id = posts.id AND saved_posts.user_id = ?
+                ), 0) AS is_saved
             FROM saved_posts
             LEFT JOIN posts ON saved_posts.post_id = posts.id
             LEFT JOIN users ON saved_posts.user_id = users.id
@@ -147,7 +157,7 @@ blogRoutes.get('/savedPosts', checkAuth, (req, res) => {
         `
     )
 
-    const posts = postsQuery.all(req.userId, req.userId, req.userId, size, (page - 1) * size)
+    const posts = postsQuery.all(req.userId, req.userId, req.userId, req.userId, size, (page - 1) * size)
 
     res.send({
         status: 200,
@@ -194,7 +204,12 @@ blogRoutes.get('/myPosts', checkAuth, (req, res) => {
                     SELECT COUNT(post_votes.id)
                     FROM post_votes
                     WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = FALSE
-                ), 0) AS is_disliked
+                ), 0) AS is_disliked,
+                IFNULL((
+                    SELECT COUNT(saved_posts.id)
+                    FROM saved_posts
+                    WHERE saved_posts.post_id = posts.id AND saved_posts.user_id = ?
+                ), 0) AS is_saved
             FROM posts
             LEFT JOIN users ON posts.user_id = users.id
             WHERE posts.user_id = ?
@@ -203,7 +218,7 @@ blogRoutes.get('/myPosts', checkAuth, (req, res) => {
         `
     )
 
-    const posts = query.all(req.userId, req.userId, req.userId, size, (page - 1) * size)
+    const posts = query.all(req.userId, req.userId, req.userId, req.userId, size, (page - 1) * size)
 
     res.send({
         status: 200,
@@ -252,14 +267,19 @@ blogRoutes.get('/:id', getUserId, (req, res) => {
                 SELECT COUNT(post_votes.id)
                 FROM post_votes
                 WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = FALSE
-            ), 0) AS is_disliked
+            ), 0) AS is_disliked,
+            IFNULL((
+                    SELECT COUNT(saved_posts.id)
+                    FROM saved_posts
+                    WHERE saved_posts.post_id = posts.id AND saved_posts.user_id = ?
+                ), 0) AS is_saved
             FROM posts
             LEFT JOIN users ON posts.user_id = users.id
             WHERE posts.id = ?
         `
     )
 
-    const post = getPostQuery.get(req.userId, req.userId, req.params.id)
+    const post = getPostQuery.get(req.userId, req.userId, req.userId, req.params.id)
 
     res.send({
         status: post ? 200 : 404,
@@ -293,7 +313,7 @@ blogRoutes.delete('/:id', checkAuth, (req, res) => {
 })
 
 // Get all comments for a blog post
-blogRoutes.get('/:id/comments', (req, res) => {
+blogRoutes.get('/:id/comments', getUserId, (req, res) => {
     // Pagination
     const size = req.query.size || 20
     const page = req.query.page || 1
@@ -310,14 +330,22 @@ blogRoutes.get('/:id/comments', (req, res) => {
                     SELECT COUNT(comment_votes.id)
                     FROM comment_votes
                     WHERE comment_votes.comment_id = comments.id AND comment_votes.is_like = TRUE
-                    GROUP BY comment_votes.comment_id
                 ), 0) AS likes,
                 IFNULL((
                     SELECT COUNT(comment_votes.id)
                     FROM comment_votes
                     WHERE comment_votes.comment_id = comments.id AND comment_votes.is_like = FALSE
-                    GROUP BY comment_votes.comment_id
-                ), 0) AS dislikes
+                ), 0) AS dislikes,
+                IFNULL((
+                    SELECT COUNT(comment_votes.id)
+                    FROM comment_votes
+                    WHERE comment_votes.comment_id = comments.id AND comment_votes.user_id = ? AND comment_votes.is_like = TRUE
+                ), 0) AS is_liked,
+                IFNULL((
+                    SELECT COUNT(comment_votes.id)
+                    FROM comment_votes
+                    WHERE comment_votes.comment_id = comments.id AND comment_votes.user_id = ? AND comment_votes.is_like = FALSE
+                ), 0) AS is_disliked
             FROM comments
             LEFT JOIN users on comments.user_id = users.id
             WHERE comments.post_id=?
@@ -325,7 +353,7 @@ blogRoutes.get('/:id/comments', (req, res) => {
             LIMIT ? OFFSET ?
         `
     )
-    const comments = getCommentsQuery.all(req.params.id, size, (page - 1) * size)
+    const comments = getCommentsQuery.all(req.userId, req.userId, req.params.id, size, (page - 1) * size)
 
     res.send({
         status: 200,
