@@ -1,0 +1,76 @@
+### Failed login
+
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{"username":"asd", "password":"asd"}
+
+### Successful login
+
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{"username":"admin", "password":"password"}
+
+### Failed registration
+
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{"username":"admin", "password":"password"}
+
+### Successful registration
+
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{"username":"test", "password":"test"}
+
+### Successful login with new user
+
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{"username":"test", "password":"test"}
+
+### Failed password change
+
+POST http://localhost:8000/auth/changePassword
+Content-Type: application/json
+
+{"currentPassword":"test", "newPassword":"123123"}
+
+### Failed admin user password change
+
+POST http://localhost:8000/auth/changePassword
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTY1ODgyOCwiZXhwIjoxNzQ5NjYyNDI4fQ.gduMx54zvnEgl46qt0IOGQ0XqdzlcegeM_vk23NA5i4
+
+{"currentPassword":"test", "newPassword":"123123"}
+
+### Successful admin user password change
+
+POST http://localhost:8000/auth/changePassword
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTY1ODgyOCwiZXhwIjoxNzQ5NjYyNDI4fQ.gduMx54zvnEgl46qt0IOGQ0XqdzlcegeM_vk23NA5i4
+
+{"currentPassword":"password", "newPassword":"123123"}
+
+### Failed log in after password change
+
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{"username":"admin", "password":"password"}
+
+### Successful log in after password change
+
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{"username":"admin", "password":"123123"}
+
+### Get user info
+GET http://localhost:8000/auth/userInfo
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTY1ODgyOCwiZXhwIjoxNzQ5NjYyNDI4fQ.gduMx54zvnEgl46qt0IOGQ0XqdzlcegeM_vk23NA5i4

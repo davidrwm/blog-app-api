@@ -1,0 +1,95 @@
+### Get all blog posts
+GET http://localhost:8000/post
+
+### Create new blog post (no token)
+POST http://localhost:8000/post
+Content-Type: application/json
+
+{"title":"New Blog Post", "body":"New Post Body"}
+
+### Create new blog post (empty title and body)
+POST http://localhost:8000/post
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+{"title":"", "body":""}
+
+### Create new blog post (complete)
+POST http://localhost:8000/post
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+{"title":"New Blog Post", "body":"New Post Body"}
+
+### Get new blog post
+GET http://localhost:8000/post/21
+
+### Get invalid blog post
+GET http://localhost:8000/post/22
+
+### Update a blog post
+PUT http://localhost:8000/post/21
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+{"title":"Edited Blog Post", "body":"Edited Post Body"}
+
+### Get updated blog post
+GET http://localhost:8000/post/21
+
+### Delete the new blog post
+DELETE http://localhost:8000/post/21
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Try deleting the new blog post again
+DELETE http://localhost:8000/post/21
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Get comments for a blog post
+GET http://localhost:8000/post/1/comments
+
+### Post a comment on a blog post (empty body)
+POST http://localhost:8000/post/1/comment
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+{}
+
+### Post a comment on a blog post (complete)
+POST http://localhost:8000/post/1/comment
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+{"body":"Cool post"}
+
+### Like a blog post
+GET http://localhost:8000/post/1/like
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Dislike a blog post
+GET http://localhost:8000/post/1/dislike
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Clear vote for a blog post
+GET http://localhost:8000/post/1/clearVote
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Get blog post like count
+GET http://localhost:8000/post/1/likes
+
+### Get blog post dislike count
+GET http://localhost:8000/post/1/dislikes
+
+### Save a blog post
+GET http://localhost:8000/post/1/save
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Unsave a blog post
+GET http://localhost:8000/post/1/unsave
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Get saved posts list
+GET http://localhost:8000/post/savedPosts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q

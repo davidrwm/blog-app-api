@@ -1,0 +1,34 @@
+### Post a comment for post 1
+POST http://localhost:8000/post/1/comment
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+{"body":"A comment."}
+
+### Show comments for post 1
+GET http://localhost:8000/post/1/comments
+
+### Edit comment for post 1
+PUT http://localhost:8000/comment/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+{"body":"An edited comment."}
+
+### Like comment 1
+GET http://localhost:8000/comment/1/like
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Dislike comment 1
+GET http://localhost:8000/comment/1/dislike
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Clear vote for comment 1
+GET http://localhost:8000/comment/1/clearVote
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+
+### Get comment 1 likes
+GET http://localhost:8000/comment/1/likes
+
+### Get comment 1 dislikes
+GET http://localhost:8000/comment/1/dislikes
