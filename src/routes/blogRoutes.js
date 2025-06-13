@@ -5,11 +5,12 @@ import validatePostInput from '../middlewares/validatePostInputMiddleware.js'
 import validateCommentInput from '../middlewares/validateCommentInputMiddleware.js'
 import validatePost from '../middlewares/validatePostMiddleware.js'
 import checkAuth from '../middlewares/authMiddleware.js'
+import getUserId from '../middlewares/getUserIdMiddleware.js'
 
 const blogRoutes = express.Router()
 
 // Get all blog posts
-blogRoutes.get('/', (req, res) => {
+blogRoutes.get('/', getUserId, (req, res) => {
     // Pagination
     const size = req.query.size || 10
     const page = req.query.page || 1
@@ -52,8 +53,13 @@ blogRoutes.get('/', (req, res) => {
                 IFNULL((
                     SELECT COUNT(post_votes.id)
                     FROM post_votes
-                    WHERE post_votes.post_id = posts.id AND post_votes.user_id = ?
-                ), 0) AS is_liked
+                    WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = TRUE
+                ), 0) AS is_liked,
+                IFNULL((
+                    SELECT COUNT(post_votes.id)
+                    FROM post_votes
+                    WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = FALSE
+                ), 0) AS is_disliked
             FROM posts
             LEFT JOIN users ON posts.user_id = users.id
             ORDER BY posts.id DESC
@@ -61,7 +67,7 @@ blogRoutes.get('/', (req, res) => {
         `
     )
 
-    const posts = getPostsQuery.all(req.userId || 0, size, (page - 1) * size)
+    const posts = getPostsQuery.all(req.userId, req.userId, size, (page - 1) * size)
 
     res.send({
         status: 200,
@@ -121,7 +127,17 @@ blogRoutes.get('/savedPosts', checkAuth, (req, res) => {
                     FROM comments
                     WHERE comments.post_id = posts.id
                     GROUP BY comments.post_id
-                ), 0) AS comments
+                ), 0) AS comments,
+                IFNULL((
+                    SELECT COUNT(post_votes.id)
+                    FROM post_votes
+                    WHERE post_votes.post_id = saved_posts.post_id AND post_votes.user_id = ? AND post_votes.is_like = TRUE
+                ), 0) AS is_liked,
+                IFNULL((
+                    SELECT COUNT(post_votes.id)
+                    FROM post_votes
+                    WHERE post_votes.post_id = saved_posts.post_id AND post_votes.user_id = ? AND post_votes.is_like = FALSE
+                ), 0) AS is_disliked
             FROM saved_posts
             LEFT JOIN posts ON saved_posts.post_id = posts.id
             LEFT JOIN users ON saved_posts.user_id = users.id
@@ -131,7 +147,63 @@ blogRoutes.get('/savedPosts', checkAuth, (req, res) => {
         `
     )
 
-    const posts = postsQuery.all(req.userId, size, (page - 1) * size)
+    const posts = postsQuery.all(req.userId, req.userId, req.userId, size, (page - 1) * size)
+
+    res.send({
+        status: 200,
+        data: posts,
+        message: ''
+    })
+})
+
+// Show posts created by the current user
+blogRoutes.get('/myPosts', checkAuth, (req, res) => {
+    // Pagination
+    const size = req.query.size || 10
+    const page = req.query.page || 1
+
+    const query = db.prepare(
+        `
+            SELECT
+                posts.id,
+                posts.title,
+                posts.body,
+                posts.user_id,
+                users.username,
+                IFNULL((
+                    SELECT COUNT(post_votes.id)
+                    FROM post_votes
+                    WHERE post_votes.post_id = posts.id AND post_votes.is_like = TRUE
+                ), 0) AS likes,
+                IFNULL((
+                    SELECT COUNT(post_votes.id)
+                    FROM post_votes
+                    WHERE post_votes.post_id = posts.id AND post_votes.is_like = FALSE
+                ), 0) AS dislikes,
+                IFNULL((
+                    SELECT COUNT(comments.id)
+                    FROM comments
+                    WHERE comments.post_id = posts.id
+                ), 0) AS comments,
+                IFNULL((
+                    SELECT COUNT(post_votes.id)
+                    FROM post_votes
+                    WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = TRUE
+                ), 0) AS is_liked,
+                IFNULL((
+                    SELECT COUNT(post_votes.id)
+                    FROM post_votes
+                    WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = FALSE
+                ), 0) AS is_disliked
+            FROM posts
+            LEFT JOIN users ON posts.user_id = users.id
+            WHERE posts.user_id = ?
+            ORDER BY posts.id DESC
+            LIMIT ? OFFSET ?
+        `
+    )
+
+    const posts = query.all(req.userId, req.userId, req.userId, size, (page - 1) * size)
 
     res.send({
         status: 200,
@@ -141,7 +213,7 @@ blogRoutes.get('/savedPosts', checkAuth, (req, res) => {
 })
 
 // Get a blog post
-blogRoutes.get('/:id', (req, res) => {
+blogRoutes.get('/:id', getUserId, (req, res) => {
     // Get the post
     // const getPostQuery = db.prepare('SELECT * FROM posts WHERE id=?')
 
@@ -170,14 +242,24 @@ blogRoutes.get('/:id', (req, res) => {
                     FROM comments
                     WHERE comments.post_id = posts.id
                     GROUP BY comments.post_id
-                ), 0) AS comments
+                ), 0) AS comments,
+            IFNULL((
+                SELECT COUNT(post_votes.id)
+                FROM post_votes
+                WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = TRUE
+            ), 0) AS is_liked,
+            IFNULL((
+                SELECT COUNT(post_votes.id)
+                FROM post_votes
+                WHERE post_votes.post_id = posts.id AND post_votes.user_id = ? AND post_votes.is_like = FALSE
+            ), 0) AS is_disliked
             FROM posts
             LEFT JOIN users ON posts.user_id = users.id
             WHERE posts.id = ?
         `
     )
 
-    const post = getPostQuery.get(req.params.id)
+    const post = getPostQuery.get(req.userId, req.userId, req.params.id)
 
     res.send({
         status: post ? 200 : 404,

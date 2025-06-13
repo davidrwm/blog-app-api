@@ -10,14 +10,14 @@ Content-Type: application/json
 ### Create new blog post (empty title and body)
 POST http://localhost:8000/post
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 {"title":"", "body":""}
 
 ### Create new blog post (complete)
 POST http://localhost:8000/post
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 {"title":"New Blog Post", "body":"New Post Body"}
 
@@ -30,7 +30,7 @@ GET http://localhost:8000/post/22
 ### Update a blog post
 PUT http://localhost:8000/post/21
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 {"title":"Edited Blog Post", "body":"Edited Post Body"}
 
@@ -40,12 +40,12 @@ GET http://localhost:8000/post/21
 ### Delete the new blog post
 DELETE http://localhost:8000/post/21
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 ### Try deleting the new blog post again
 DELETE http://localhost:8000/post/21
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 ### Get comments for a blog post
 GET http://localhost:8000/post/1/comments
@@ -53,28 +53,28 @@ GET http://localhost:8000/post/1/comments
 ### Post a comment on a blog post (empty body)
 POST http://localhost:8000/post/1/comment
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 {}
 
 ### Post a comment on a blog post (complete)
 POST http://localhost:8000/post/1/comment
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 {"body":"Cool post"}
 
 ### Like a blog post
 GET http://localhost:8000/post/1/like
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 ### Dislike a blog post
 GET http://localhost:8000/post/1/dislike
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 ### Clear vote for a blog post
 GET http://localhost:8000/post/1/clearVote
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 ### Get blog post like count
 GET http://localhost:8000/post/1/likes
@@ -84,12 +84,12 @@ GET http://localhost:8000/post/1/dislikes
 
 ### Save a blog post
 GET http://localhost:8000/post/1/save
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 ### Unsave a blog post
 GET http://localhost:8000/post/1/unsave
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 ### Get saved posts list
 GET http://localhost:8000/post/savedPosts
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTYzODY3NiwiZXhwIjoxNzQ5NjQyMjc2fQ.WjvFOgPejT0TkfMPN550cfeMGZaJUxEZ3rp0bIdUX3Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8

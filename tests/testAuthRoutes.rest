@@ -44,7 +44,7 @@ Content-Type: application/json
 
 POST http://localhost:8000/auth/changePassword
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTY1ODgyOCwiZXhwIjoxNzQ5NjYyNDI4fQ.gduMx54zvnEgl46qt0IOGQ0XqdzlcegeM_vk23NA5i4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 {"currentPassword":"test", "newPassword":"123123"}
 
@@ -52,7 +52,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJh
 
 POST http://localhost:8000/auth/changePassword
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTY1ODgyOCwiZXhwIjoxNzQ5NjYyNDI4fQ.gduMx54zvnEgl46qt0IOGQ0XqdzlcegeM_vk23NA5i4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
 
 {"currentPassword":"password", "newPassword":"123123"}
 
@@ -73,4 +73,8 @@ Content-Type: application/json
 ### Get user info
 GET http://localhost:8000/auth/userInfo
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTY1ODgyOCwiZXhwIjoxNzQ5NjYyNDI4fQ.gduMx54zvnEgl46qt0IOGQ0XqdzlcegeM_vk23NA5i4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
+
+### Get my posts
+GET http://localhost:8000/post/myPosts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc0OTgwOTYwNywiZXhwIjoxNzQ5ODEzMjA3fQ.GeAhFUYrkCGKdz7h4MFb_06q1HHSd--SbbT1qLsEXo8
